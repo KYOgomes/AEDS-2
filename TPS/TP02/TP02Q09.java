@@ -1,6 +1,6 @@
 /*** Classe Jogadores
  * @author Caio Gomes Alcantara Glória - 763989
- * @version 29/04/2024
+ * @version 02/04/2024
  */
 
  import java.io.BufferedReader;
@@ -90,13 +90,24 @@
         String hairColor1 = p1.getHairColour();
         String hairColor2 = p2.getHairColour();
         if (hairColor1 == null && hairColor2 == null) {
-            return 0;
+            // Se ambas as cores do cabelo forem nulas, compare pelos nomes
+            return p1.getName().compareToIgnoreCase(p2.getName());
         } else if (hairColor1 == null) {
-            return 1;
-        } else if (hairColor2 == null) {
+            // Se apenas a cor do cabelo de p1 for nula, p1 vem primeiro
             return -1;
+        } else if (hairColor2 == null) {
+            // Se apenas a cor do cabelo de p2 for nula, p2 vem primeiro
+            return 1;
         } else {
-            return hairColor1.compareToIgnoreCase(hairColor2);
+            // Se ambas as cores do cabelo forem definidas, compare-as
+            int hairColorComparison = hairColor1.compareToIgnoreCase(hairColor2);
+            if (hairColorComparison == 0) {
+                // Se as cores do cabelo forem iguais, compare pelos nomes
+                return p1.getName().compareToIgnoreCase(p2.getName());
+            } else {
+                // Se as cores do cabelo forem diferentes, retorne a comparação das cores
+                return hairColorComparison;
+            }
         }
     }
  

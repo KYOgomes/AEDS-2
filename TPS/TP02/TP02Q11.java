@@ -16,67 +16,57 @@
  
  public class TP02Q11 extends Personagem {
  
-     public static void main(String[] args) throws Exception {
- 
-         String idPersonagens = "";
-         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
-         idPersonagens = entrada.readLine();
-         while (!idPersonagens.equals("FIM")) {
-             personagens[tampersonagens] = new Personagem();
-             TratarString(ler(idPersonagens));
-             tampersonagens++;
-             idPersonagens = entrada.readLine();
-         }
- 
-         ordenarPorYearOfBirth(personagens, tampersonagens);
- 
-         for (int i = 0; i < tampersonagens; i++) {
-             imprimir(personagens[i]);
-         }
- 
-         // Criar arquivo de log
-         criarArquivoLog();
-     }
- 
-     // Método para ordenar por nome usando seleção
-     public static void ordenarPorYearOfBirth(Personagem[] array, int tamanho) {
-        int maxYearOfBirth = Integer.MIN_VALUE;
-        int minYearOfBirth = Integer.MAX_VALUE;
+    public static void main(String[] args) throws Exception {
 
-        // Encontrar o valor máximo e mínimo do ano de nascimento
-        for (Personagem p : array) {
-            int yearOfBirth = p.getYearOfBirth();
-            if (yearOfBirth > maxYearOfBirth) {
-                maxYearOfBirth = yearOfBirth;
+        String idPersonagens = "";
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        idPersonagens = entrada.readLine();
+        while (!idPersonagens.equals("FIM")) {
+            personagens[tampersonagens] = new Personagem();
+            TratarString(ler(idPersonagens));
+            tampersonagens++;
+            idPersonagens = entrada.readLine();
+        }
+
+        // Ordenar por ano de nascimento
+        ordenarPorYearOfBirth(personagens, tampersonagens);
+
+        for (int i = 0; i < tampersonagens; i++) {
+            imprimir(personagens[i]);
+        }
+
+        // Criar arquivo de log
+        criarArquivoLog();
+    }
+
+    // Método para ordenar por yearOfBirth usando seleção
+    public static void ordenarPorYearOfBirth(Personagem[] array, int tamanho) {
+        for (int i = 0; i < tamanho - 1; i++) {
+            int indiceMenor = i;
+            for (int j = i + 1; j < tamanho; j++) {
+                if (compararYearOfBirth(array[j], array[indiceMenor]) < 0) {
+                    indiceMenor = j;
+                }
             }
-            if (yearOfBirth < minYearOfBirth) {
-                minYearOfBirth = yearOfBirth;
+            if (indiceMenor != i) {
+                Personagem temp = array[i];
+                array[i] = array[indiceMenor];
+                array[indiceMenor] = temp;
             }
         }
+    }
 
-        // Calcular o intervalo
-        int intervalo = maxYearOfBirth - minYearOfBirth + 1;
-
-        // Criar um array de contagem para armazenar a contagem de cada ano de nascimento
-        int[] contagem = new int[intervalo];
-        for (Personagem p : array) {
-            contagem[p.getYearOfBirth() - minYearOfBirth]++;
+    // Método para comparar o ano de nascimento dos personagens
+    public static int compararYearOfBirth(Personagem p1, Personagem p2) {
+        int yearOfBirth1 = p1.getYearOfBirth();
+        int yearOfBirth2 = p2.getYearOfBirth();
+        if (yearOfBirth1 == yearOfBirth2) {
+            // Se os anos de nascimento forem iguais, compare pelos nomes
+            return p1.getName().compareToIgnoreCase(p2.getName());
+        } else {
+            // Se os anos de nascimento forem diferentes, compare-os
+            return Integer.compare(yearOfBirth1, yearOfBirth2);
         }
-
-        // Atualizar o array de contagem para armazenar as posições finais dos elementos ordenados
-        for (int i = 1; i < intervalo; i++) {
-            contagem[i] += contagem[i - 1];
-        }
-
-        // Criar um array temporário para armazenar os elementos ordenados
-        Personagem[] ordenado = new Personagem[tamanho];
-        for (int i = tamanho - 1; i >= 0; i--) {
-            ordenado[contagem[array[i].getYearOfBirth() - minYearOfBirth] - 1] = array[i];
-            contagem[array[i].getYearOfBirth() - minYearOfBirth]--;
-        }
-
-        // Copiar os elementos ordenados de volta para o array original
-        System.arraycopy(ordenado, 0, array, 0, tamanho);
     }
  
      // Método para imprimir personagem

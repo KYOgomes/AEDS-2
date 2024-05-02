@@ -1,6 +1,6 @@
 /*** Classe Jogadores
  * @author Caio Gomes Alcantara Glória - 763989
- * @version 29/04/2024
+ * @version 02/04/2024
  */
 
  import java.io.BufferedReader;
@@ -13,7 +13,8 @@
  import java.text.SimpleDateFormat;
  import java.util.Date;
  
- public class TP02Q15 extends Personagem {
+ 
+ public class TP02Q16 extends Personagem {
  
     public static void main(String[] args) throws Exception {
 
@@ -26,24 +27,24 @@
             tampersonagens++;
             idPersonagens = entrada.readLine();
         }
-    
-        ordenarParcialmentePorNome(personagens, tampersonagens);
-    
+
+        ordenarPorDataNascimento(personagens, tampersonagens);
+
         for (int i = 0; i < Math.min(tampersonagens, 10); i++) { // Imprime apenas os primeiros 10 personagens
             imprimir(personagens[i]);
         }
-    
+
         // Criar arquivo de log
         criarArquivoLog();
     }
- 
-     // Método para ordenar por nome usando seleção
-     public static void ordenarParcialmentePorNome(Personagem[] array, int tamanho) {
-        int contador = 0; // Contador para acompanhar o número de elementos corretamente ordenados
+
+    // Método para ordenar por data de nascimento e, se igual, por nome
+    public static void ordenarPorDataNascimento(Personagem[] array, int tamanho) {
         for (int i = 0; i < tamanho - 1; i++) {
             int indiceMenor = i;
             for (int j = i + 1; j < tamanho; j++) {
-                if (array[j].compareNome(array[indiceMenor]) < 0) {
+                int comparacao = array[j].getDateOfBirth().compareTo(array[indiceMenor].getDateOfBirth());
+                if (comparacao < 0 || (comparacao == 0 && array[j].compareNome(array[indiceMenor]) < 0)) {
                     indiceMenor = j;
                 }
             }
@@ -52,10 +53,9 @@
                 array[i] = array[indiceMenor];
                 array[indiceMenor] = temp;
             }
-            contador++; // Incrementa o contador após cada iteração
-            if (contador == 10) break; // Interrompe a ordenação quando 10 elementos estiverem corretos
         }
     }
+
  
      // Método para imprimir personagem
      public static void imprimir(Personagem p) {
@@ -96,14 +96,14 @@
          // Ordenar novamente para medir o número de movimentações
          Personagem[] copiaPersonagens = new Personagem[tampersonagens];
          System.arraycopy(personagens, 0, copiaPersonagens, 0, tampersonagens);
-         ordenarParcialmentePorNome(copiaPersonagens, tampersonagens);
+         ordenarPorDataNascimento(copiaPersonagens, tampersonagens);
          int numMovimentacoes = contarMovimentacoes(personagens, copiaPersonagens);
  
          long tempoFim = System.currentTimeMillis();
          long tempoExecucao = tempoFim - tempoInicio;
  
          try {
-             BufferedWriter writer = new BufferedWriter(new FileWriter("matricula_selecao.txt"));
+             BufferedWriter writer = new BufferedWriter(new FileWriter("matricula_insercao.txt"));
              writer.write(matricula + "\t" + numComparacoes + "\t" + numMovimentacoes + "\t" + tempoExecucao);
              writer.close();
          } catch (IOException e) {
@@ -398,9 +398,9 @@
      public static void TratarString(String entrada) throws Exception {
          int tam = entrada.length();
          if (entrada.charAt(tam - 1) == ';') {
-             entrada = entrada + "nao informado";
+             entrada = entrada + "";
          }
-         entrada = entrada.replaceAll(";;", ";nao informado;");
+         entrada = entrada.replaceAll(";;", ";;");
          String[] HPpersonagens = entrada.split(";");
  
          // ID do Personagem
@@ -419,25 +419,25 @@
          if (!HPpersonagens[3].equals("[]")) {
              personagens[tampersonagens].setHouse(HPpersonagens[3]);
          } else {
-             personagens[tampersonagens].setHouse("nao informado");
+             personagens[tampersonagens].setHouse("");
          }
          // Ancestry do Personagem
          if (!HPpersonagens[4].equals("[]")) {
              personagens[tampersonagens].setAncestry(HPpersonagens[4]);
          } else {
-             personagens[tampersonagens].setAncestry("nao informado");
+             personagens[tampersonagens].setAncestry("");
          }
          // Species do Personagem
          if (!HPpersonagens[5].equals("[]")) {
              personagens[tampersonagens].setSpecies(HPpersonagens[5]);
          } else {
-             personagens[tampersonagens].setSpecies("nao informado");
+             personagens[tampersonagens].setSpecies("");
          }
          // Patronous do Personagem
          if (!HPpersonagens[6].equals("[]")) {
              personagens[tampersonagens].setPatronus(HPpersonagens[6]);
          } else {
-             personagens[tampersonagens].setPatronus("nao informado");
+             personagens[tampersonagens].setPatronus("");
          }
          // HogwartsStaff do Personagem
          boolean hogwartsStaff = Boolean.parseBoolean(HPpersonagens[7]);
@@ -469,19 +469,19 @@
          if (!HPpersonagens[14].equals("[]")) {
              personagens[tampersonagens].setEyeColour(HPpersonagens[14]);
          } else {
-             personagens[tampersonagens].setEyeColour("nao informado");
+             personagens[tampersonagens].setEyeColour("");
          }
          // Gender do Personagem
          if (!HPpersonagens[15].equals("[]")) {
              personagens[tampersonagens].setGender(HPpersonagens[15]);
          } else {
-             personagens[tampersonagens].setGender("nao informado");
+             personagens[tampersonagens].setGender("");
          }
          // Hair Colour do Personagem
          if (!HPpersonagens[16].equals("[]")) {
              personagens[tampersonagens].setHairColour(HPpersonagens[16]);
          } else {
-             personagens[tampersonagens].setHairColour("nao informado");
+             personagens[tampersonagens].setHairColour("");
          }
          // Wizard do Personagem
          boolean wizard = HPpersonagens[17].equalsIgnoreCase("verdadeiro");
@@ -491,37 +491,32 @@
      // ---------------------------------------------------------------------------//
  
      // IMPRIMIR
-     public static void imprimir() {
-         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-         String dataNascimentoFormatada = (personagens[tampersonagens].getDateOfBirth() != null)
-                 ? sdf.format(personagens[tampersonagens].getDateOfBirth())
-                 : "N/A";
- 
-         System.out.print("[" +
-                 personagens[tampersonagens].getId() + " ## " +
-                 personagens[tampersonagens].getName() + " ## ");
-         String[] alternateNames = personagens[tampersonagens].getAlternate_names();
-         System.out.print("{");
-         for (int i = 0; i < alternateNames.length; i++) {
-             System.out.print(alternateNames[i]);
-             if (i < alternateNames.length - 1) {
-                 System.out.print(",");
-             }
-         }
-         System.out.print("} ## ");
-         System.out.print(personagens[tampersonagens].getHouse() + " ## " +
-                 personagens[tampersonagens].getAncestry() + " ## " +
-                 personagens[tampersonagens].getSpecies() + " ## " +
-                 personagens[tampersonagens].getPatronus() + " ## " +
-                 personagens[tampersonagens].getHogwartsStaff() + " ## " +
-                 personagens[tampersonagens].getHogwartsStudent() + " ## " +
-                 personagens[tampersonagens].getActorName() + " ## " +
-                 personagens[tampersonagens].getAlive() + " ## " +
-                 dataNascimentoFormatada + " ## " +
-                 personagens[tampersonagens].getYearOfBirth() + " ## " +
-                 personagens[tampersonagens].getEyeColour() + " ## " +
-                 personagens[tampersonagens].getGender() + " ## " +
-                 personagens[tampersonagens].getHairColour() + " ## " +
-                 personagens[tampersonagens].getWizard() + "]\n");
-     }
+     public static void imprimir(Personagem p) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String dataNascimentoFormatada = (p.getDateOfBirth() != null) ? sdf.format(p.getDateOfBirth()) : "N/A";
+    
+        // Verifica se a lista de alternate_names está vazia e constrói a representação
+        // em string apropriada
+        String alternateNamesStr = (p.getAlternate_names().length == 0) ? "{}"
+                : "{" + String.join(", ", p.getAlternate_names()) + "}";
+    
+        System.out.println("[" +
+                p.getId() + " ## " +
+                p.getName() + " ## " +
+                alternateNamesStr + " ## " + // Imprime a representação da lista alternate_names
+                p.getHouse() + " ## " +
+                p.getAncestry() + " ## " +
+                p.getSpecies() + " ## " +
+                p.getPatronus() + " ## " +
+                (p.getHogwartsStaff() ? "true" : "false") + " ## " + // Corrigido para exibir "true" ou "false"
+                (p.getHogwartsStudent().equalsIgnoreCase("true") ? "true" : "false") + " ## " + // Corrigido para exibir "true" ou "false"
+                p.getActorName() + " ## " +
+                (p.getAlive() ? "true" : "false") + " ## " + // Corrigido para exibir "true" ou "false"
+                dataNascimentoFormatada + " ## " +
+                p.getYearOfBirth() + " ## " +
+                p.getEyeColour() + " ## " +
+                p.getGender() + " ## " +
+                p.getHairColour() + " ## " +
+                p.getWizard() + "]");
+    }
  }

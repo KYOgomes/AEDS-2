@@ -1,6 +1,6 @@
 /*** Classe Jogadores
  * @author Caio Gomes Alcantara Glória - 763989
- * @version 29/04/2024
+ * @version 02/04/2024
  */
 
  import java.io.BufferedReader;
@@ -16,93 +16,51 @@
  
  public class TP02Q13 extends Personagem {
  
-     public static void main(String[] args) throws Exception {
- 
-         String idPersonagens = "";
-         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
-         idPersonagens = entrada.readLine();
-         while (!idPersonagens.equals("FIM")) {
-             personagens[tampersonagens] = new Personagem();
-             TratarString(ler(idPersonagens));
-             tampersonagens++;
-             idPersonagens = entrada.readLine();
-         }
- 
-         ordenarPorActorName(personagens, tampersonagens);
- 
-         for (int i = 0; i < tampersonagens; i++) {
-             imprimir(personagens[i]);
-         }
- 
-         // Criar arquivo de log
-         criarArquivoLog();
-     }
- 
-     // Método para ordenar por nome usando seleção
-     public static void ordenarPorActorName(Personagem[] array, int tamanho) {
-        mergeSort(array, 0, tamanho - 1);
+    public static void main(String[] args) throws Exception {
+
+        String idPersonagens = "";
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        idPersonagens = entrada.readLine();
+        while (!idPersonagens.equals("FIM")) {
+            personagens[tampersonagens] = new Personagem();
+            TratarString(ler(idPersonagens));
+            tampersonagens++;
+            idPersonagens = entrada.readLine();
+        }
+
+        // Ordenar por actorName
+        ordenarPorActorName(personagens, tampersonagens);
+
+        for (int i = 0; i < tampersonagens; i++) {
+            imprimir(personagens[i]);
+        }
+
+        // Criar arquivo de log
+        criarArquivoLog();
     }
-    
-    public static void mergeSort(Personagem[] array, int inicio, int fim) {
-        if (inicio < fim) {
-            int meio = (inicio + fim) / 2;
-    
-            // Ordena a primeira metade
-            mergeSort(array, inicio, meio);
-            // Ordena a segunda metade
-            mergeSort(array, meio + 1, fim);
-    
-            // Combina as duas metades ordenadas
-            merge(array, inicio, meio, fim);
-        }
-    }
-    
-    public static void merge(Personagem[] array, int inicio, int meio, int fim) {
-        int n1 = meio - inicio + 1;
-        int n2 = fim - meio;
-    
-        // Arrays temporários para armazenar as duas metades
-        Personagem[] metadeEsquerda = new Personagem[n1];
-        Personagem[] metadeDireita = new Personagem[n2];
-    
-        // Copia os elementos para os arrays temporários
-        for (int i = 0; i < n1; ++i) {
-            metadeEsquerda[i] = array[inicio + i];
-        }
-        for (int j = 0; j < n2; ++j) {
-            metadeDireita[j] = array[meio + 1 + j];
-        }
-    
-        // Índices iniciais dos subarrays
-        int i = 0, j = 0;
-    
-        // Índice inicial do array mesclado
-        int k = inicio;
-        while (i < n1 && j < n2) {
-            // Compara os elementos das duas metades e insere o menor no array principal
-            if (metadeEsquerda[i].getActorName().compareTo(metadeDireita[j].getActorName()) <= 0) {
-                array[k] = metadeEsquerda[i];
-                i++;
-            } else {
-                array[k] = metadeDireita[j];
-                j++;
+
+    // Método para ordenar por actorName usando seleção
+    public static void ordenarPorActorName(Personagem[] array, int tamanho) {
+        for (int i = 0; i < tamanho - 1; i++) {
+            int indiceMenor = i;
+            for (int j = i + 1; j < tamanho; j++) {
+                if (compararActorName(array[j], array[indiceMenor]) < 0) {
+                    indiceMenor = j;
+                }
             }
-            k++;
+            if (indiceMenor != i) {
+                Personagem temp = array[i];
+                array[i] = array[indiceMenor];
+                array[indiceMenor] = temp;
+            }
         }
-    
-        // Copia os elementos restantes de metadeEsquerda, se houver algum
-        while (i < n1) {
-            array[k] = metadeEsquerda[i];
-            i++;
-            k++;
-        }
-    
-        // Copia os elementos restantes de metadeDireita, se houver algum
-        while (j < n2) {
-            array[k] = metadeDireita[j];
-            j++;
-            k++;
-        }
+    }
+
+    // Método para comparar o actorName dos personagens
+    public static int compararActorName(Personagem p1, Personagem p2) {
+        String actorName1 = p1.getActorName();
+        String actorName2 = p2.getActorName();
+        return actorName1.compareToIgnoreCase(actorName2);
     }
  
      // Método para imprimir personagem

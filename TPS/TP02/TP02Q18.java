@@ -1,6 +1,6 @@
 /*** Classe Jogadores
  * @author Caio Gomes Alcantara Glória - 763989
- * @version 29/04/2024
+ * @version 02/04/2024
  */
 
  import java.io.BufferedReader;
@@ -13,37 +13,43 @@
  import java.text.SimpleDateFormat;
  import java.util.Date;
  
- public class TP02Q15 extends Personagem {
+ public class TP02Q18 extends Personagem {
  
-    public static void main(String[] args) throws Exception {
-
-        String idPersonagens = "";
-        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
-        idPersonagens = entrada.readLine();
-        while (!idPersonagens.equals("FIM")) {
-            personagens[tampersonagens] = new Personagem();
-            TratarString(ler(idPersonagens));
-            tampersonagens++;
-            idPersonagens = entrada.readLine();
-        }
-    
-        ordenarParcialmentePorNome(personagens, tampersonagens);
-    
-        for (int i = 0; i < Math.min(tampersonagens, 10); i++) { // Imprime apenas os primeiros 10 personagens
+     public static void main(String[] args) throws Exception {
+ 
+         String idPersonagens = "";
+         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+         idPersonagens = entrada.readLine();
+         while (!idPersonagens.equals("FIM")) {
+             personagens[tampersonagens] = new Personagem();
+             TratarString(ler(idPersonagens));
+             tampersonagens++;
+             idPersonagens = entrada.readLine();
+         }
+ 
+         ordenarPorHouse(personagens, tampersonagens);
+ 
+         for (int i = 0; i < Math.min(tampersonagens, 10); i++) { // Imprime apenas os primeiros 10 personagens
             imprimir(personagens[i]);
         }
-    
-        // Criar arquivo de log
-        criarArquivoLog();
-    }
+ 
+         // Criar arquivo de log
+         criarArquivoLog();
+     }
  
      // Método para ordenar por nome usando seleção
-     public static void ordenarParcialmentePorNome(Personagem[] array, int tamanho) {
-        int contador = 0; // Contador para acompanhar o número de elementos corretamente ordenados
+     public static void ordenarPorHouse(Personagem[] array, int tamanho) {
         for (int i = 0; i < tamanho - 1; i++) {
             int indiceMenor = i;
             for (int j = i + 1; j < tamanho; j++) {
-                if (array[j].compareNome(array[indiceMenor]) < 0) {
+                // Verifica se as casas são iguais
+                if (array[j].getHouse().compareTo(array[indiceMenor].getHouse()) == 0) {
+                    // Se as casas forem iguais, ordena pelo nome
+                    if (array[j].getName().compareTo(array[indiceMenor].getName()) < 0) {
+                        indiceMenor = j;
+                    }
+                } else if (array[j].getHouse().compareTo(array[indiceMenor].getHouse()) < 0) {
+                    // Se as casas forem diferentes, ordena pela house
                     indiceMenor = j;
                 }
             }
@@ -52,10 +58,9 @@
                 array[i] = array[indiceMenor];
                 array[indiceMenor] = temp;
             }
-            contador++; // Incrementa o contador após cada iteração
-            if (contador == 10) break; // Interrompe a ordenação quando 10 elementos estiverem corretos
         }
     }
+    
  
      // Método para imprimir personagem
      public static void imprimir(Personagem p) {
@@ -96,7 +101,7 @@
          // Ordenar novamente para medir o número de movimentações
          Personagem[] copiaPersonagens = new Personagem[tampersonagens];
          System.arraycopy(personagens, 0, copiaPersonagens, 0, tampersonagens);
-         ordenarParcialmentePorNome(copiaPersonagens, tampersonagens);
+         ordenarPorHouse(copiaPersonagens, tampersonagens);
          int numMovimentacoes = contarMovimentacoes(personagens, copiaPersonagens);
  
          long tempoFim = System.currentTimeMillis();

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class TP2Q01 {
+public class TP02Q01 {
     public static void main(String args[]) {
 
         Personagem inicial = new Personagem();

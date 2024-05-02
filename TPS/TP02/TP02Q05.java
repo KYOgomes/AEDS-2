@@ -13,7 +13,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class TP02Q05 extends Personagem {
 
     public static void main(String[] args) throws Exception {
@@ -87,7 +86,7 @@ public class TP02Q05 extends Personagem {
 
     // Método para criar arquivo de log
     public static void criarArquivoLog() {
-        String matricula = "775799"; // Substitua pela sua matrícula
+        String matricula = "763989"; // Substitua pela sua matrícula
         int numComparacoes = (tampersonagens * (tampersonagens - 1)) / 2; // Número de comparações no pior caso
         long tempoInicio = System.currentTimeMillis();
 

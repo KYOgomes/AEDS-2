@@ -1,8 +1,8 @@
-/** Classe Jogadores
+/** arvore binária, imprimir, pesquisar, iserir\remover e altura
  * @author Caio Gomes Alcantara Glória - 763989
  * @version 08/05/2024
  */
-
+//arvore não balanceada, onde o primeiro elemento a ser adicionado sempre será a raiz
 class No {
     int valor;
     No esquerda, direita;

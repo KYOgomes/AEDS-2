@@ -2,7 +2,7 @@
  * @author Caio Gomes Alcantara Glória - 763989
  * @version 08/05/2024
  */
-//realiza a soma de todos os elementos de uma arvore
+//Exercicio imprime todos os valores paras dentro da arvore
 import java.util.Scanner;
 class No {
     int valor;
@@ -14,11 +14,11 @@ class No {
     }
 }
 
-class balanceamento {
+class pares {
     No raiz;
     Scanner sc = new Scanner(System.in);
 
-    balanceamento() {
+    pares() {
         raiz = null;
     }
 
@@ -118,48 +118,44 @@ class balanceamento {
             return pesquisarRec(raiz.direita, valor);
     }
 
-    public int soma()
+    public int par()
     {
-        return somaResp(raiz);
+        return parResp(raiz);
     }
 
-    public int somaResp(No no)
+    public int parResp(No no)
     {
         int resp = 0;
         if(no != null)
         {
-            resp = no.valor + somaResp(no.esquerda) + somaResp(no.direita);
+            if(no.valor%2==0 )
+            {
+                System.out.println(no.valor);
+                resp = 1;
+            }
+
+            resp += parResp(no.esquerda);
+            resp += parResp(no.direita);
         }
         return resp;
     }
     public static void main(String[] args) {
         int[] valores = {1, 2, 3, 5, 6, 7, 8};
-        balanceamento arvore = new balanceamento();
+        pares arvore = new pares();
         arvore.construirArvoreBalanceada(valores, 0, valores.length - 1);
 
         //teste de metodos com o valor 4
         System.out.println("Árvore In-Order:");
         arvore.inorder();
-        System.out.println("Árvore Binária:");
-        arvore.imprimirArvore();
+        System.out.println("");
         System.out.println("-----------------------------------------");
         //inserir o valor 4.
         System.out.println("Valor 4 inserido:");
         arvore.inserir(4);
         arvore.imprimirArvore();
-        System.out.println("Pesquisa de valor 4:");
-        if(arvore.pesquisar(0)==true)
-        {
-            System.out.println("Valor encontrado");
-        }
-        else 
-        {
-            System.out.println("valor NAO encontrado");
-        }
-        System.out.println("-----------------------------------------");
 
-        System.out.println("A altura da arvore e: " + arvore.altura());
-        System.out.println("A soma dos arvore e: " + arvore.soma());
+        System.out.println("Os numeros pares da arvore sao: ");
+        arvore.par();
 
     }
 }

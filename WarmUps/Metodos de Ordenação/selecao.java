@@ -1,6 +1,7 @@
 /* Metodo de ordenação por SELEÇÂO, neste metodo selecionamos o primeiro elemento do array como o MENOR, entao o comparamos com os demais (em J) para confirmar 
 tal afirmação, ou negalá, apos confirmar que o mesmo é o menor, o elemento i aumenta 1 e assim por diante. 
 COMPLEXIDADE O(n^2) em ambos os casos*/
+
 import java.util.Scanner;
 
 public class selecao {

@@ -1,6 +1,7 @@
 /*O algoritmo de ordenação MergeSort é um algoritmo de ordenação eficiente baseado em comparações que segue a abordagem dividir para conquistar. funciona de 
  * forma recursiva e acaba criando subarrays para serem ordenados em menor quantidade
  melhor e pior caso de O(n log n), bom para grandes conjuntos de dados!*/
+ 
 import java.util.Scanner;
 public class mergesort {
 

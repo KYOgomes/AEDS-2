@@ -2,6 +2,7 @@
 /*O algoritmo de ordenação HeapSort é um algoritmo baseado em comparações que utiliza uma estrutura de dados chamada heap. Um heap máximo é uma árvore binária 
 em que o valor de cada nó é maior ou igual ao valor de seus filhos.  
 COMPLEXIDADE: O(n log n) isto pois o heapfy tem complexidade de o(n) e reorganiza-los tem complexidade de O(lg n)*/
+
 import java.util.Scanner;
 
 public class heapsort {

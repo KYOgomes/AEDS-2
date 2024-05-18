@@ -1,6 +1,7 @@
 /*metodo de ordenação INSERÇÃO, neste metodo o vetor é percorrido e duas partes são separadas, a parte ordenada e a parte sem ordenação,a parte ordenada sempre
  aumenta em cada interação. 
  COMPLEXIDADE O(n²) no pior caso e O(n) no melhor caso. é um algoritmo ESTAVEL.*/
+ 
 import java.util.Scanner;
 public class Insercao 
 {

@@ -2,6 +2,7 @@
 /*O algoritmo de ordenação ShellSort é uma extensão do algoritmo de inserção que permite a troca de elementos distantes.
  * COMPLEXIDADE: O(n^2)
  */
+
 import java.util.Scanner;
 
 public class shellsort {

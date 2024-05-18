@@ -1,0 +1,47 @@
+Questões Abertas (V ou F)-> 
+
+1- O custo de pesquisa em uma arvore binaria nunca será linear: 
+Falso, se a ordem de insersão em uma arvore for, o proximo maior que o anterios, ou ao contrario
+seu custo será linear, O(n). 
+pesquisa/inserção:
+BST não balanceada-> O(1) melhor caso e O(n) pior caso
+BST balanceada-> O(log) ambos casos
+
+
+2- Toda arvore binaria de pesquisa com mais de 0 elementos, está organizada em formato heap ou heap invertido:
+falso, o heal/heap invertido garantem q os filhos serão menores que os pais, ou que os filhoes serão maiores que os pais
+ja em uma arvore BST, a organização deve garantir que os menores estejam à esquerda e os maiores Á direita.
+
+
+3- A ordem de complexidade do QUICKsort no pior caso será quadratica: 
+verdadeiro, O(n^2), ocorre quando o pivot escolhido é o maior elemento ou o menor elemento
+O(n log n) no melhor caso, quando divide o array em partes iguais
+
+
+4- O custo de pesquisa em uma arvore BALANCEADA, nunca pode ser linear: 
+verdadeiro, o custo de pesquisa de uma arvore binaria é O(log n)
+
+
+5- O melhor algoritmo em termo de movimentações é o SELEÇãO, cuja complexidade é O(n log n):
+Falso, o algoritmo de SELEÇãO tem complexidade de O(n^2) e realiza 3N - 3 movimentações, devido ao swap, o melhor 
+algotitmo seria o inserção, com complexidade de O(n²) no pior caso e O(n) no melhor caso. é um algoritmo ESTAVEL e 
+realizaria 0 movimentações	
+
+
+6- Se um array estiver pré-ordenado, o melhor metodo de ordenação seria o de inserção, com complexidade no melhor 
+caso de O(n):
+verdadeiro, O algoritmo de inserção é o melhor para arrays pré ordenados pois nunca iria percorrer o arry mais de uma vez, 
+tendo complexidade de O(n) melhor caso
+
+
+7- No pior caso, a ordem de complexidade do HEAPsort sera quadratica:
+falso, a complexidade do HEAPsort em todos os casos é O(n log n)
+
+
+8- A ordem de complexidade do algoritmo de bolha sempre será de O(n^2), independente da ordenação inicial:
+falso, se o array estiver previamente ordenado, a complexidade será de O(n), mas em seu pior e caso medio 
+será de O(N^2)
+
+
+
+__questões de prova no PAPEL__

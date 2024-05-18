@@ -1,6 +1,7 @@
 /*O metodo de ordenação por BOLHA, O algoritmo de ordenação por bolha funciona comparando repetidamente pares de elementos adjacentes e os trocando de posição 
 se estiverem na ordem errada. Esse processo é repetido até que nenhum swap seja necessário, o que indica que o vetor está ordenado. 
 COMPLEXIDADE: O(n) no melhor caso e O(n^2) no pior caso*/
+
 import java.util.Scanner;
 
 public class bubble {

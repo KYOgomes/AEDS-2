@@ -3,6 +3,7 @@ Funciona contando o número de elementos distintos e calculando sua posição no
 COMPLEXIDADE: Melhor caso: O(n)
 Pior caso (array de contagens): O(n + R)
 Pior caso (hash table de contagens): O(n)*/
+
 import java.util.Scanner;
 public class countingsort {
     public static void countingSort(int[] array, int max) {

@@ -3,6 +3,7 @@
 Recursão: Aplica recursivamente o passo de partição nos subarrays até que todo o array esteja ordenado.
 Combinação: Não há etapa explícita de combinação, já que os subarrays são ordenados in-place.
 COMPLEXIDADE: O(n lg n) melhor caso e O(n^2) no pior caso*/
+
 import java.util.Scanner;
 
 public class quicksort {

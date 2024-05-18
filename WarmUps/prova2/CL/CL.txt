@@ -1,7 +1,7 @@
 Questões Abertas (V ou F)-> 
 
 1- O custo de pesquisa em uma arvore binaria nunca será linear: 
-Falso, se a ordem de insersão em uma arvore for, o proximo maior que o anterios, ou ao contrario
+Falso, se a ordem de inserção em uma arvore for, o proximo maior que o anterios, ou ao contrario
 seu custo será linear, O(n). 
 pesquisa/inserção:
 BST não balanceada-> O(1) melhor caso e O(n) pior caso
@@ -42,6 +42,199 @@ falso, a complexidade do HEAPsort em todos os casos é O(n log n)
 falso, se o array estiver previamente ordenado, a complexidade será de O(n), mas em seu pior e caso medio 
 será de O(N^2)
 
+9- mergesort O(n log n) pois sempre divide o array pela metade, ordena sub array, ESTAVEL.
 
+------------------------ORDENAÇÕES------------------------------------------------------------------------
+inserção:
+public static void ordenacaoInsercao(int[] vetor)
+    {
+        for(int i = 1; i < vetor.length; i++)
+        {
+            int temp = vetor[i];
+            int j = i - 1;
+            while(j >= 0 && vetor[j]>temp)
+            {
+                vetor[j+1] = vetor[j];
+                j--;
+            }
+            vetor[j+1] = temp;
+        }
+    }
+
+seleção:
+public static void ordenacaoSelecao(int[] vetor) {
+        int n = vetor.length;
+        for (int i = 0; i < n - 1; i++) {
+            int menor = i;
+
+            for (int j = i + 1; j < n; j++) {
+                if (vetor[j] < vetor[menor]) {
+                    menor = j;
+                }
+            }
+
+            int temp = vetor[menor];
+            vetor[menor] = vetor[i];
+            vetor[i] = temp;
+        }
+    }
+
+bolha:
+for(int i = 0; i < n - 1; i++) {
+            swapped = false; // Inicializa a flag como falso para esta iteração
+            // Loop interno para comparar pares adjacentes e trocar, se necessário
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (vetor[j] > vetor[j + 1]) {
+                    // Troca os elementos
+                    int temp = vetor[j];
+                    vetor[j] = vetor[j + 1];
+                    vetor[j + 1] = temp;
+                    swapped = true; // Define a flag como true, indicando que ocorreu uma troca
+                }
+            }
+            if (!swapped) {
+                break;
+            }
+        }
+
+quick:
+private static void ordenaQuick(int[] array, int baixo, int alto) {
+        if (baixo < alto) {
+            int pivô = particionar(array, baixo, alto);
+            ordenaQuick(array, baixo, pivô - 1);
+            ordenaQuick(array, pivô + 1, alto);
+        }
+    }
+
+    private static int particionar(int[] array, int baixo, int alto) {
+        int pivô = array[alto];
+        int i = baixo - 1;
+
+        for (int j = baixo; j < alto; j++) {
+            if (array[j] < pivô) {
+                i++;
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        int temp = array[i + 1];
+        array[i + 1] = array[alto];
+        array[alto] = temp;
+
+        return i + 1;
+    }
+----------------------------------------------------------------------------------------------------------
 
 __questões de prova no PAPEL__
+
+1- questão ARVORE de ARVORE) criar metodo contarPalavra que recebe 2 caracteres e conta o numero de palavras que começam com o 
+primeiro caractere e terminam com o ultimo: 
+
+class arvore{
+    No raiz;
+    (...)
+    int contarPalavras(char primeiro, char ultimo)
+    {
+        No no = pesquisar(primeiro, this.raiz);
+        if(no == null || no.raiz == null)
+        {
+            return 0;
+        }
+        return contar(ultimo, no.raiz);
+    }
+
+    int contar(char ch, No2 i)
+    {
+        if(i != null)
+        {
+            int j = (ch == i.palavra.charAt(i.palavra.()-1))?1:0;
+            j+=contar(ch, i.esq);
+            j+=contar(ch, i.dir);
+            return j;
+        }
+        return 0;
+    }
+
+    int contarPorNivel(char ch, no2 raiz)
+    {
+        int cont = 0;
+        Queue<No2> fila = new Queue<x>;
+        fila.add(raiz);
+        while(!fila.isEmpty())
+        {
+            no2 no = fila.poll();
+            if(no.palavra.chatAt(no.palavra.sin()-1)==ch)
+            {
+                cont ++;
+            }
+            if(no.esq !=null)
+            {
+                fila.add(no.esq);
+            }
+            if(no.dir !=null)
+            {
+                fila.add(no.dir);
+            }
+        }
+        return cont;
+    }
+}
+
+2- questao matriz flexivel em C) ordenar decrescente e adicionar na lista que esta na matriz:
+
+checarArvore(No * Noarvore, Celula cabeça, int pesquisado)
+{
+    if(NoArvore == null)
+    {
+        return;
+    }
+    if(pesquisado < NoArvore -> numero)
+    {
+        checarArvore(NoArvore->esq, cabeça, pesquisado);
+    }
+    else if(pesquisado > NoArvore-> numero)
+    {
+        checarArvore(NoArvore->dir, cabeça, pesquisado);
+    }
+    else { inserirCelula(cabeça, pesquisado)}
+}
+
+Celula * econtraRepetido(No * raiz, CelulaMatriz * inicio)
+{
+    Celula * cabeça = malloc(sizeof(Celula));
+
+    CelulaMatriz * tempLinha = inicio;
+    while(tempLinha != null)
+    {
+        CelulaMatriz * tempColuna = tempLinha;
+        while(tempColuna != null)
+        {
+            checarArvore(raiz, cabeçam tempColuna->numero);
+            tempColuna = tempColuna-> prox;
+        }
+        tempLinha = tempLinha->inf;
+    }
+    return cabeça;
+}
+
+void inserirCelula(Celula cabeça, int chave)
+{
+    Celula * temp = cabeça;
+    Celula * ins = malloc(sizeof(Celula));
+    ins-> numero = chave;
+
+    while(temp->prox != null)
+    {
+        if(chave > temp->prox.numero)
+        {
+            Celula * op = temp->prox;
+            temp->ins;
+            ins->prox = op;
+            return;
+        }
+        temp = temp->prox;
+    }
+    temp->prox = ins;
+}

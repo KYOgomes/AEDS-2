@@ -259,7 +259,7 @@ public void caminhar() {
                     // Fim da matriz
                     break;
                 }}}}
-                
+
 public void removerImpar() {
         Iterator<Integer> it = valores.iterator();
         while (it.hasNext()) {
@@ -267,5 +267,5 @@ public void removerImpar() {
                 it.remove();
             }}}
 
-4-
+4- Implementar treesort e falar a complexidade:
 

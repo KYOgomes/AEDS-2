@@ -57,9 +57,7 @@ public static void ordenacaoInsercao(int[] vetor)
                 vetor[j+1] = vetor[j];
                 j--;
             }
-            vetor[j+1] = temp;
-        }
-    }
+            vetor[j+1] = temp;}}
 
 seleção:
 public static void ordenacaoSelecao(int[] vetor) {
@@ -70,14 +68,10 @@ public static void ordenacaoSelecao(int[] vetor) {
             for (int j = i + 1; j < n; j++) {
                 if (vetor[j] < vetor[menor]) {
                     menor = j;
-                }
-            }
-
+                }}
             int temp = vetor[menor];
             vetor[menor] = vetor[i];
-            vetor[i] = temp;
-        }
-    }
+            vetor[i] = temp;}}
 
 bolha:
 for(int i = 0; i < n - 1; i++) {
@@ -96,7 +90,20 @@ for(int i = 0; i < n - 1; i++) {
                 break;
             }
         }
-
+        ou
+        public static void Bubble(int vet[], int tam) {
+        int temp;
+        boolean controle = true;
+        for (int i = 0; i < (tam - 1); i++) {
+            if (vet[i] > vet[i + 1]) {
+                temp = vet[i];
+                vet[i] = vet[i + 1];
+                vet[i + 1] = temp;
+                controle = false;
+            }}
+        if (controle != true) {
+            Bubble(vet, tam);}}
+    
 quick:
 private static void ordenaQuick(int[] array, int baixo, int alto) {
         if (baixo < alto) {
@@ -115,14 +122,11 @@ private static void ordenaQuick(int[] array, int baixo, int alto) {
                 i++;
                 int temp = array[i];
                 array[i] = array[j];
-                array[j] = temp;
-            }
-        }
+                array[j] = temp;}}
 
         int temp = array[i + 1];
         array[i + 1] = array[alto];
         array[alto] = temp;
-
         return i + 1;
     }
 ----------------------------------------------------------------------------------------------------------
@@ -268,4 +272,53 @@ public void removerImpar() {
             }}}
 
 4- Implementar treesort e falar a complexidade:
+public void insert(int value) {
+        root = insertRec(root, value);
+    }
+    private TreeNode insertRec(TreeNode root, int value) {
+        if (root == null) {
+            root = new TreeNode(value);
+            return root;
+        }
+        if (value < root.value) {
+            root.left = insertRec(root.left, value);
+        } else if (value > root.value) {
+            root.right = insertRec(root.right, value);
+        }
+        return root;
+    }
+    public void inorderTraversal(TreeNode node, List<Integer> sortedList) {
+        if (node != null) {
+            inorderTraversal(node.left, sortedList);
+            sortedList.add(node.value);
+            inorderTraversal(node.right, sortedList);
+        }
+    }
+Complexidade de O(n log n) melhor caso e O(n^2) pior caso.
 
+5- Lista de Pilha, percorrer a lista , depois Percorrer a pilha em cada CelulaLista e retornar no final qual das pilhas tem mais elementos
+//contar elementos da pilha
+int contarElementos() {
+        int contador = 0;
+        CelulaPilha atual = topo;
+        while (atual != null) {
+            contador++;
+            atual = atual.prox;
+        }
+        return contador;}
+//pilha com mais elementos
+CelulaLista encontrarPilhaComMaisElementos() {
+        CelulaLista atual = inicio;
+        CelulaLista pilhaMaior = null;
+        int maxElementos = 0;
+
+        while (atual != null) {
+            int quantidade = atual.contarElementos();
+            if (quantidade > maxElementos) {
+                maxElementos = quantidade;
+                pilhaMaior = atual;
+            }
+            atual = atual.prox;
+        }
+        return pilhaMaior;}      
+    

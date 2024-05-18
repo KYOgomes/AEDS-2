@@ -126,12 +126,9 @@ private static void ordenaQuick(int[] array, int baixo, int alto) {
         return i + 1;
     }
 ----------------------------------------------------------------------------------------------------------
-
 __questões de prova no PAPEL__
-
 1- questão ARVORE de ARVORE) criar metodo contarPalavra que recebe 2 caracteres e conta o numero de palavras que começam com o 
 primeiro caractere e terminam com o ultimo: 
-
 class arvore{
     No raiz;
     (...)
@@ -182,8 +179,8 @@ class arvore{
     }
 }
 
-2- questao matriz flexivel em C) ordenar decrescente e adicionar na lista que esta na matriz:
 
+2- questao matriz flexivel em C) ordenar decrescente e adicionar na lista que esta na matriz:
 checarArvore(No * Noarvore, Celula cabeça, int pesquisado)
 {
     if(NoArvore == null)
@@ -238,3 +235,37 @@ void inserirCelula(Celula cabeça, int chave)
     }
     temp->prox = ins;
 }
+
+3- percorrer uma matriz flexivel, e em cada no da matriz tem uma lista, remover os numero impares da lista: 
+import java.util.Iterator;
+public void caminhar() {
+        Celula atual = matriz[0][0]; // Começar pela célula superior esquerda
+        while (atual != null) {
+            // Realize alguma operação com a célula atual
+            atual.removerImpar();
+            
+            // Navegar para a próxima célula na linha
+            if (atual.prox != null) {
+                atual = atual.prox;
+            } else {
+                // Mover para a próxima linha
+                if (atual.baixo != null) {
+                    atual = atual.baixo;
+                    // Ir para o início da linha
+                    while (atual.ant != null) {
+                        atual = atual.ant;
+                    }
+                } else {
+                    // Fim da matriz
+                    break;
+                }}}}
+                
+public void removerImpar() {
+        Iterator<Integer> it = valores.iterator();
+        while (it.hasNext()) {
+            if (it.next() % 2 != 0) {
+                it.remove();
+            }}}
+
+4-
+

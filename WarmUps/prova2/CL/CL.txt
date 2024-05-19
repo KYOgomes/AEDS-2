@@ -1,6 +1,6 @@
-Questões Abertas (V ou F)-> 
+/*Questões Abertas (V ou F)-> 
 
-1- O custo de pesquisa em uma arvore binaria nunca será linear: 
+1- O custo de pesquisa em uma arvore binaria nunca será linear.: 
 Falso, se a ordem de inserção em uma arvore for, o proximo maior que o anterios, ou ao contrario
 seu custo será linear, O(n). 
 pesquisa/inserção:
@@ -8,28 +8,28 @@ BST não balanceada-> O(1) melhor caso e O(n) pior caso
 BST balanceada-> O(log) ambos casos
 
 
-2- Toda arvore binaria de pesquisa com mais de 0 elementos, está organizada em formato heap ou heap invertido:
+2- Toda arvore binaria de pesquisa com mais de 0 elementos, está organizada em formato heap ou heap invertido.:
 falso, o heal/heap invertido garantem q os filhos serão menores que os pais, ou que os filhoes serão maiores que os pais
 ja em uma arvore BST, a organização deve garantir que os menores estejam à esquerda e os maiores Á direita.
 
 
-3- A ordem de complexidade do QUICKsort no pior caso será quadratica: 
+3- A ordem de complexidade do QUICKsort no pior caso será quadratica.: 
 verdadeiro, O(n^2), ocorre quando o pivot escolhido é o maior elemento ou o menor elemento
 O(n log n) no melhor caso, quando divide o array em partes iguais
 
 
-4- O custo de pesquisa em uma arvore BALANCEADA, nunca pode ser linear: 
+4- O custo de pesquisa em uma arvore BALANCEADA, nunca pode ser linear.: 
 verdadeiro, o custo de pesquisa de uma arvore binaria é O(log n)
 
 
-5- O melhor algoritmo em termo de movimentações é o SELEÇãO, cuja complexidade é O(n log n):
+5- O melhor algoritmo em termo de movimentações é o SELEÇãO, cuja complexidade é O(n log n).:
 Falso, o algoritmo de SELEÇãO tem complexidade de O(n^2) e realiza 3N - 3 movimentações, devido ao swap, o melhor 
 algotitmo seria o inserção, com complexidade de O(n²) no pior caso e O(n) no melhor caso. é um algoritmo ESTAVEL e 
 realizaria 0 movimentações	
 
 
 6- Se um array estiver pré-ordenado, o melhor metodo de ordenação seria o de inserção, com complexidade no melhor 
-caso de O(n):
+caso de O(n.):
 verdadeiro, O algoritmo de inserção é o melhor para arrays pré ordenados pois nunca iria percorrer o arry mais de uma vez, 
 tendo complexidade de O(n) melhor caso
 
@@ -129,14 +129,14 @@ private static void ordenaQuick(int[] array, int baixo, int alto) {
         array[alto] = temp;
         return i + 1;
     }
-----------------------------------------------------------------------------------------------------------
-__questões de prova no PAPEL__
+----------------------------------------------------------------------------------------------------------*/
+                                        __QUESTOES PAPEL__
 1- questão ARVORE de ARVORE) criar metodo contarPalavra que recebe 2 caracteres e conta o numero de palavras que começam com o 
 primeiro caractere e terminam com o ultimo: 
 class arvore{
     No raiz;
     (...)
-    int contarPalavras(char primeiro, char ultimo)
+    int pesquisar(char primeiro, char ultimo)
     {
         No no = pesquisar(primeiro, this.raiz);
         if(no == null || no.raiz == null)
@@ -325,4 +325,58 @@ CelulaLista encontrarPilhaComMaisElementos() {
 6- Arvore de Arvore em JAVA, pegar uma palavra chave de referencia, Contar quantas palavras na arvore de arvores começam com a letra da palavra
 chave e tem a mesma quantidade de caracteres: 
 
+NoChar buscar(String palavra) {
+        char letra = palavra.charAt(0);
+        NoChar no = buscarRec(raiz, letra);
+        if (no != null) {
+            int count = contarPalavras(no, palavra.length());
+            System.out.println(count);
+        } else {
+            System.out.println("letra nao existe.");
+        }
+        return no;
+    }
+    private NoChar buscarRec(NoChar raiz, char letra) {
+        if (raiz == null || raiz.letra == letra) {
+            return raiz;
+        }
+        if (letra < raiz.letra) {
+            return buscarRec(raiz.esquerda, letra);
+        }
+        return buscarRec(raiz.direita, letra);
+    }
 
+    private int contarPalavras(NoChar no, int tamanho) {
+        int contador = 0;
+        NoPalavra atual = No.palavras;
+        while (atual != null) {
+            if (atual.palavra.length() == tamanho) {
+                contador++;
+            }
+            atual = atual.prox;
+        }
+        return contador;
+    }
+
+7- metodo que recebe 2 arrays e retorna 1 só ordenado: 
+
+public static int[] vetorOrdenado(int[] vetA, int[] vetB) {
+        int[] arrayCombinado = new int[vetA.length + vetB.length];
+        for (int i = 0; i < vetA.length; i++) {
+            combinedArray[i] = vetA[i];}
+
+        for (int i = 0; i < vetB.length; i++) {
+            combinedArray[vetA.length + i] = vetB[i];}
+
+        // Ordenar o array combinado com inserção pois uma parte ja esta ordenada
+        for(int i = 1; i < arrayCombinado.length; i++)
+        {
+            int temp = arrayCombinado[i];
+            while(int j = i - 1; j >= 0 && arrayCombinado[j]>temp)
+            {
+                arrayCombinado[j+1] = arrayCombinado[j];
+                j--;
+            }
+            arrayCombinado[j+1] = temp;}
+        return combinedArray;}
+    

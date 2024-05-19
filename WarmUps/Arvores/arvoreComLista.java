@@ -36,7 +36,6 @@ class Celula{
     private Contato contato;
     private Celula prox;
 
-
     //construtor
 
     public Celula(){
@@ -50,23 +49,13 @@ class Celula{
 
     //gets
 
-    public Celula getProx(){
-        return this.prox;
-    }
-
-    public Contato getContato(){
-        return this.contato;
-    }
+    public Celula getProx(){return this.prox;}
+    public Contato getContato(){return this.contato;}
 
     //sets
 
-    public void setProx(Celula prox){
-        this.prox = prox;
-    }
-
-    public void setContato(Contato contato){
-        this.contato = contato;
-    }
+    public void setProx(Celula prox){this.prox = prox;}
+    public void setContato(Contato contato){this.contato = contato;}
 }
 
 class No{
@@ -90,31 +79,15 @@ class No{
 
     //gets
 
-    public char getLetra(){
-        return this.letra;
-    }   
-
-    public No getNoesq(){
-        return this.esq;
-    }
-
-    public No getNodir(){
-        return this.dir;
-    }
+    public char getLetra(){return this.letra;}   
+    public No getNoesq(){return this.esq;}
+    public No getNodir(){return this.dir;}
 
     //sets
 
-    public void setLetra(char letra){
-        this.letra = letra;
-    }
-
-    public void setNoesq(No esq){
-        this.esq = esq;
-    }
-
-    public void setNodir(No dir){
-        this.dir = dir;
-    }
+    public void setLetra(char letra){this.letra = letra;}
+    public void setNoesq(No esq){this.esq = esq;}
+    public void setNodir(No dir){this.dir = dir;}
 
 
     public void inserirnofim(Contato contato){

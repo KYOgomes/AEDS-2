@@ -409,3 +409,27 @@ public String pesquisarNo(String cpf, No i) throws Exception {
     }
     return resp;
 }
+
+9- caminha por uma matriz flexivel considerando que já temos os contrutores feitos
+public void caminhaMatriz(int valor) {
+        matrizNo linhaTemp = inicio;
+        int i , j;   i = j = 0;
+
+        while (linhaTemp != null) {
+            matrizNo colunaTemp = linhaTemp; 
+            while (colunaTemp != null) {
+                System.out.println("Matriz Pos [" + i + "][" + j + "]:");
+                if (colunaTemp.root != null) {
+                    colunaTemp.printRoot(); // Printa a BST associada ao nó
+                    if (colunaTemp.buscar(valor)) {
+                        System.out.println("Valor " + valor + " encontrado na posição [" + i + "][" + j + "].");
+                        return true;
+                    }
+                }
+                colunaTemp = colunaTemp.right; // Vai para a direita
+                j++;
+            }
+            linhaTemp = linhaTemp.down; // Vai para baixo
+            i++;
+            j = 0;
+        }return false;}

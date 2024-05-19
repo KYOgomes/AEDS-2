@@ -380,3 +380,32 @@ public static int[] vetorOrdenado(int[] vetA, int[] vetB) {
             arrayCombinado[j+1] = temp;}
         return combinedArray;}
     
+8- Numa agenda de contados, pesquisar pelo nome e cpf da pessoa.:
+public String pesquisarNo(String nome, No i) throws Exception{
+        String resp = "false";
+        char letra = Character.toUpperCase(nome.charAt(0));
+        if(i == null){
+            throw new Exception("Arvore vazia");
+        }else if(i.getLetra() > letra){
+            pesquisarNo(nome, i.getNoesq());
+        }else if(i.getLetra() < letra){
+            pesquisarNo(nome, i.getNodir());
+        }else{
+            resp = i.pesquisarContato(nome);
+        }
+        return resp;
+    }
+
+public String pesquisarNo(String cpf, No i) throws Exception {
+    String resp = "Contato não encontrado";
+    if (i == null) {
+        throw new Exception("Árvore vazia");
+    } else if (i.getCpf().compareTo(cpf) > 0) {
+        resp = pesquisarNo(cpf, i.getNoesq());
+    } else if (i.getCpf().compareTo(cpf) < 0) {
+        resp = pesquisarNo(cpf, i.getNodir());
+    } else {
+        resp = i.pesquisarContato(cpf);
+    }
+    return resp;
+}

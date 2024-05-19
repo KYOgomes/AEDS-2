@@ -137,7 +137,32 @@ private static void ordenaQuick(int[] array, int baixo, int alto) {
         array[alto] = temp;
         return i + 1;
     }
-----------------------------------------------------------------------------------------------------------*/
+-------------------------------------------------------------------------------------
+shell:
+Melhor caso: array ordenado O(nlogn)
+Pior caso: ordem decrescente O(n^2)
+	void shellsort(){
+		int h = 1;
+		do{
+			h = (h*3) + 1
+		}while(h<n);
+		do{
+			h/=3;
+			for(int cor=0; cor<h;cor++){
+				insercaoPorCor(cor, h);
+			}
+		}while(h != 1);}
+	void insercaoPorCor(int cor, int h){
+		for(int i = (h+cor); i<n;i+=h){
+			int tmp = array[i];
+			int j = i-h;
+			while((j>=0) && (array[j]>tmp)){
+				array[j+h] = array[j];
+				j -= h;
+			}
+			array[j+h] = tmp;
+		}}
+----------------------------------------------------------------------------------------------------------
                                         __QUESTOES PAPEL__
 1- questão ARVORE de ARVORE) criar metodo contarPalavra que recebe 2 caracteres e conta o numero de palavras que começam com o 
 primeiro caractere e terminam com o ultimo: 

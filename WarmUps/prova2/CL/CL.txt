@@ -322,3 +322,7 @@ CelulaLista encontrarPilhaComMaisElementos() {
         }
         return pilhaMaior;}      
     
+6- Arvore de Arvore em JAVA, pegar uma palavra chave de referencia, Contar quantas palavras na arvore de arvores começam com a letra da palavra
+chave e tem a mesma quantidade de caracteres: 
+
+

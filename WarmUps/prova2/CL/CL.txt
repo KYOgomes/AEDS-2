@@ -166,56 +166,25 @@ Pior caso: ordem decrescente O(n^2)
                                         __QUESTOES PAPEL__
 1- questão ARVORE de ARVORE) criar metodo contarPalavra que recebe 2 caracteres e conta o numero de palavras que começam com o 
 primeiro caractere e terminam com o ultimo: 
-class arvore{
-    No raiz;
-    (...)
-    int pesquisar(char primeiro, char ultimo)
-    {
-        No no = pesquisar(primeiro, this.raiz);
-        if(no == null || no.raiz == null)
-        {
-            return 0;
-        }
-        return contar(ultimo, no.raiz);
-    }
+class no{
+    char letra;
+    No esq, dir;
+    no2 raiz;
 
-    int contar(char ch, No2 i)
+    public int contarPalavra(char primeiro, char ultimo, no2 i)
     {
-        if(i != null)
-        {
-            int j = (ch == i.palavra.charAt(i.palavra.()-1))?1:0;
-            j+=contar(ch, i.esq);
-            j+=contar(ch, i.dir);
-            return j;
-        }
-        return 0;
-    }
-
-    int contarPorNivel(char ch, no2 raiz)
-    {
-        int cont = 0;
-        Queue<No2> fila = new Queue<x>;
-        fila.add(raiz);
-        while(!fila.isEmpty())
-        {
-            no2 no = fila.poll();
-            if(no.palavra.chatAt(no.palavra.sin()-1)==ch)
+        int cont =0;
+        if(no2 i != null){
+            if(i.palavra.charAt(0) == primeiro && i.palavra.charAt(palavra.lenght - 1) == ultimo)
             {
-                cont ++;
+                cont++;
             }
-            if(no.esq !=null)
-            {
-                fila.add(no.esq);
-            }
-            if(no.dir !=null)
-            {
-                fila.add(no.dir);
-            }
+            cont += contarPalavra(primeiro, ultimo, i.esq);
+            cont += contarPalavra(primeiro, ultimo, i.dir);
         }
         return cont;
     }
 }
-
 
 2- questao matriz flexivel em C) ordenar decrescente e adicionar na lista que esta na matriz:
 checarArvore(No * Noarvore, Celula cabeça, int pesquisado)
@@ -234,7 +203,6 @@ checarArvore(No * Noarvore, Celula cabeça, int pesquisado)
     }
     else { inserirCelula(cabeça, pesquisado)}
 }
-
 Celula * econtraRepetido(No * raiz, CelulaMatriz * inicio)
 {
     Celula * cabeça = malloc(sizeof(Celula));
@@ -252,7 +220,6 @@ Celula * econtraRepetido(No * raiz, CelulaMatriz * inicio)
     }
     return cabeça;
 }
-
 void inserirCelula(Celula cabeça, int chave)
 {
     Celula * temp = cabeça;
@@ -305,13 +272,17 @@ public void removerImpar() {
             }}}
 
 4- Implementar treesort e falar a complexidade:
-   public static void ordenar(int[] array) {
-        ArvoreBST arvore = new ArvoreBST();
-        for (int valor : array) {
-            arvore.inserir(valor);
+   No inserirRec(No raiz, int valor) {
+        if (raiz == null) {
+            raiz = new No(valor);
+            return raiz;
         }
-        ArvoreBST.Contador contador = arvore.new Contador();
-        arvore.caminharCentral(arvore.raiz, array, contador);
+        if (valor < raiz.valor) {
+            raiz.esquerda = inserirRec(raiz.esquerda, valor);
+        } else if (valor > raiz.valor) {
+            raiz.direita = inserirRec(raiz.direita, valor);
+        }
+        return raiz;
     }
     void caminharCentral(No raiz, int[] array, Contador contador) {
         if (raiz != null) {

@@ -1,56 +1,62 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
-// Definição da struct
-typedef struct {
-    char nome[50];
+typedef struct
+{
+    char nome[101];
     char regiao;
-    float custo;
-} Aluno;
+    int custo;
+} Alunos;
 
-int main() {
-    int Q;
-    scanf("%d", &Q);
-    Aluno *alunos = (Aluno *)malloc(Q * sizeof(Aluno));
-    getchar();
-
-    // Leitura dos dados de cada aluno
-    for (int i = 0; i < Q; i++) 
+int main()
+{   
+    int q; 
+    scanf("%d", &q);
+    Alunos pessoa[q];  
+    for(int i = 0; i < q; i++)
     {
-        char entrada[100];
-        fgets(entrada, sizeof(entrada), stdin);
-        entrada[strcspn(entrada, "\n")] = 0;
+        scanf("%s %c %d", pessoa[i].nome, &pessoa[i].regiao, &pessoa[i].custo); 
+    }   
 
-        // Tokenização da string de entrada
-        char *token = strtok(entrada, " ");
-        strncpy(alunos[i].nome, token, sizeof(alunos[i].nome) - 1);
-        alunos[i].nome[sizeof(alunos[i].nome) - 1] = '\0';
+    char nomes[q][101];
 
-        token = strtok(NULL, " ");
-        if (token == NULL || strlen(token) != 1) {
-            fprintf(stderr, "Erro ao processar a entrada.\n");
-            free(alunos);
-            return 1;
-        }
-        alunos[i].regiao = token[0];
-
-        token = strtok(NULL, " ");
-        if (token == NULL) {
-            fprintf(stderr, "Erro ao processar a entrada.\n");
-            free(alunos);
-            return 1;
-        }
-        alunos[i].custo = atof(token);
-    }
-
-    // Exibir a lista de alunos
-    for (int i = 0; i < Q; i++) 
+    //ordenar primeiro por custo, região (L, N, O, S)nesta ordem, e por fim nome.
+    //bubbleSort O(n^2) no pior caso e O(n) no melhor caso
+    for(int i = 0; i < q; i++)
     {
-        printf("%s\n", alunos[i].nome);
+        for(int j = i+1; j < q; j++)
+        {
+            if(pessoa[i].custo > pessoa[j].custo)
+            {
+                Alunos temp = pessoa[i];
+                pessoa[i] = pessoa[j];
+                pessoa[j] = temp;
+            }
+            else if(pessoa[i].custo == pessoa[j].custo)
+            {
+                if(pessoa[i].regiao > pessoa[j].regiao)
+                {
+                    Alunos temp = pessoa[i];
+                    pessoa[i] = pessoa[j];
+                    pessoa[j] = temp;
+                }
+                else if(pessoa[i].regiao == pessoa[j].regiao)
+                {
+                    if(strcmp(pessoa[i].nome, pessoa[j].nome) > 0)
+                    {
+                        Alunos temp = pessoa[i];
+                        pessoa[i] = pessoa[j];
+                        pessoa[j] = temp;
+                    }
+                }
+            }
+        }
     }
-    // Liberar a memória alocada
-    free(alunos);
-
+    printf("------------------------------------\n");
+    for(int i = 0; i < q; i++)
+    {
+        printf("%s\n", pessoa[i].nome);
+    }
     return 0;
 }

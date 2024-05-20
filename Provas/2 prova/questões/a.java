@@ -1,10 +1,11 @@
+/*
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 typedef struct
 {
-    char nome[100];
+    char nome[101];
     char regiao;
     int custo;
 } Alunos;
@@ -18,11 +19,10 @@ int main()
     {
         scanf("%s %c %d", pessoa[i].nome, &pessoa[i].regiao, &pessoa[i].custo); 
     }   
-
-    char nomes[q][100];
+    char nomes[q][101];
 
     //ordenar primeiro por custo, região (L, N, O, S)nesta ordem, e por fim nome.
-
+    //bubbleSort O(n^2) no pior caso e O(n) no melhor caso
     for(int i = 0; i < q; i++)
     {
         for(int j = i+1; j < q; j++)
@@ -60,3 +60,4 @@ int main()
     }
     return 0;
 }
+ */

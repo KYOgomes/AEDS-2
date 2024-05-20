@@ -53,7 +53,6 @@ int main()
             }
         }
     }
-    printf("------------------------------------\n");
     for(int i = 0; i < q; i++)
     {
         printf("%s\n", pessoa[i].nome);

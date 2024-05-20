@@ -5,10 +5,10 @@ COMPLEXIDADE: O(n) no melhor caso e O(n^2) no pior caso*/
 import java.util.Scanner;
 
 public class bubble {
-    public static void ordenacaoBolha(int[] vetor) {
+    public static void ordenacaoBolha(int[] vetor) 
+    {
         int n = vetor.length;
         boolean swapped; // Flag para indicar se houve troca em uma iteração
-
         // Loop externo para percorrer o vetor
         for (int i = 0; i < n - 1; i++) {
             swapped = false; // Inicializa a flag como falso para esta iteração
@@ -23,7 +23,6 @@ public class bubble {
                     swapped = true; // Define a flag como true, indicando que ocorreu uma troca
                 }
             }
-
             // Se nenhuma troca ocorreu durante uma iteração, o vetor está ordenado e
             // podemos sair do loop
             if (!swapped) {

@@ -430,3 +430,23 @@ public void caminhaMatriz(int valor) {
             j = 0;
         }return false;}
 
+10-criar uma arvore com listas ligadas:
+private LinkedList searchRec(BstNode root, int key) {
+        if (root == null || root.key == key)
+            return (root != null) ? root.values : null;  
+        if (root.key > key)
+            return searchRec(root.left, key);  
+        return searchRec(root.right, key);  
+    }
+
+    public void add(int data) {
+        LinkedListNode newNode = new LinkedListNode(data);  
+        if (head == null) {  
+            head = newNode;
+        } else {
+            LinkedListNode temp = head;  
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;  
+        }}

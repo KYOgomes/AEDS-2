@@ -21,7 +21,8 @@ int main()
 
     char nomes[q][100];
 
-    //ordenar primeiro por custo, região e por fim nome
+    //ordenar primeiro por custo, região (L, N, O, S)nesta ordem, e por fim nome.
+
     for(int i = 0; i < q; i++)
     {
         for(int j = i+1; j < q; j++)
@@ -52,11 +53,10 @@ int main()
             }
         }
     }
-    
+    printf("------------------------------------\n");
     for(int i = 0; i < q; i++)
     {
         printf("%s\n", pessoa[i].nome);
     }
-
     return 0;
 }

@@ -415,8 +415,8 @@ public void caminhaMatriz(int valor) {
             matrizNo colunaTemp = linhaTemp; 
             while (colunaTemp != null) {
             System.out.println("Matriz Pos [" + i + "][" + j + "]:");
-                if (colunaTemp.root != null) {
-                    colunaTemp.printRoot(); // Printa a BST associada ao nó
+                if (colunaTemp.raiz != null) {
+                    colunaTemp.printraiz(); // Printa a BST associada ao nó
                     if (colunaTemp.buscar(valor)) {
                         System.out.println("Valor " + valor + " encontrado na posição [" + i + "][" + j + "].");
                         return true;
@@ -431,20 +431,20 @@ public void caminhaMatriz(int valor) {
         }return false;}
 
 10-criar uma arvore com listas ligadas:
-private LinkedList searchRec(BstNode root, int key) {
-        if (root == null || root.key == key)
-            return (root != null) ? root.values : null;  
-        if (root.key > key)
-            return searchRec(root.left, key);  
-        return searchRec(root.right, key);  
+private LinkedList buscar(BstNode raiz, int chave) {
+        if (raiz == null || raiz.chave == chave)
+            return (raiz != null) ? raiz.valor : null;  
+        if (raiz.chave > chave)
+            return buscar(raiz.left, chave);  
+        return buscar(raiz.right, chave);  
     }
 
     public void add(int data) {
         LinkedListNode newNode = new LinkedListNode(data);  
-        if (head == null) {  
-            head = newNode;
+        if (cabeça == null) {  
+            cabeça = newNode;
         } else {
-            LinkedListNode temp = head;  
+            LinkedListNode temp = cabeça;  
             while (temp.next != null) {
                 temp = temp.next;
             }

@@ -305,26 +305,19 @@ public void removerImpar() {
             }}}
 
 4- Implementar treesort e falar a complexidade:
-public void insert(int value) {
-        root = insertRec(root, value);
-    }
-    private TreeNode insertRec(TreeNode root, int value) {
-        if (root == null) {
-            root = new TreeNode(value);
-            return root;
+   public static void ordenar(int[] array) {
+        ArvoreBST arvore = new ArvoreBST();
+        for (int valor : array) {
+            arvore.inserir(valor);
         }
-        if (value < root.value) {
-            root.left = insertRec(root.left, value);
-        } else if (value > root.value) {
-            root.right = insertRec(root.right, value);
-        }
-        return root;
+        ArvoreBST.Contador contador = arvore.new Contador();
+        arvore.caminharCentral(arvore.raiz, array, contador);
     }
-    public void inorderTraversal(TreeNode node, List<Integer> sortedList) {
-        if (node != null) {
-            inorderTraversal(node.left, sortedList);
-            sortedList.add(node.value);
-            inorderTraversal(node.right, sortedList);
+    void caminharCentral(No raiz, int[] array, Contador contador) {
+        if (raiz != null) {
+            caminharCentral(raiz.esquerda, array, contador);
+            array[contador.index++] = raiz.valor;
+            caminharCentral(raiz.direita, array, contador);
         }
     }
 Complexidade de O(n log n) melhor caso e O(n^2) pior caso.

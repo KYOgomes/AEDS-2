@@ -733,5 +733,311 @@ public class Main {
     }
 }
 -----------------------------------------------------
+soma das diagonais de uma matriz->
+import java.util.Random;
+import java.util.Scanner;
+
+public class XdoTesouro {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random random = new Random();
+        System.out.print("Digite o número de linhas e colunas da matriz: ");
+        int n = sc.nextInt();
+        // Criar a matriz flexível
+        int[][] matriz = new int[n][n];
+        // Preencher a matriz com números aleatórios e imprimir a matriz
+        System.out.println("Matriz gerada:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matriz[i][j] = random.nextInt(100); // números aleatórios entre 0 e 99
+                System.out.print(matriz[i][j] + "\t");
+            }
+            System.out.println();
+        }
+        int somaDiagonalPrincipal = 0;
+        int somaDiagonalSecundaria = 0;
+        // Somar os elementos das diagonais
+        for (int i = 0; i < n; i++) {
+            somaDiagonalPrincipal += matriz[i][i]; // Diagonal principal (\)
+            somaDiagonalSecundaria += matriz[i][n - 1 - i]; // Diagonal secundária (/)
+        }
+        // Imprimir a soma das diagonais
+        System.out.println("Soma da diagonal principal: " + somaDiagonalPrincipal);
+        System.out.println("Soma da diagonal secundária: " + somaDiagonalSecundaria);
+        System.out.println("Soma total das duas diagonais: " + (somaDiagonalPrincipal + somaDiagonalSecundaria));
+        sc.close();
+    }
+}
+---------------------------------------------------------
+fabrica do noel->
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+// Definindo uma estrutura para mapeamento de traduções
+typedef struct TranslationMapper {
+    char *idioma;
+    char *saudacao;
+} Mapper;
+// Função que mapeia o país (idioma) para a saudação correspondente
+char* mapearPaisParaSaudacao(Mapper* traducoes, int N, char *pais) {
+    for(int i = 0; i < N; i++) {
+        if(strcmp(pais, traducoes[i].idioma) == 0) {
+            return traducoes[i].saudacao;
+        }
+    }
+    return NULL;
+}
+void lerTraducoes(Mapper* traducoes, int N);
+void liberarTraducoes(Mapper* traducoes, int N);
+int main() {
+    int N;
+    scanf("%d", &N); // Lê o número de traduções
+    Mapper traducoes[N]; // Cria um array de estruturas para armazenar as traduções
+    lerTraducoes(traducoes, N); // Lê as traduções
+    int M;
+    scanf("%d", &M); // Lê o número de saudações a serem exibidas
+    while (M--) {
+        char nome[31];
+        char pais[31];
+        scanf(" %[^\n]", nome); // Lê o nome
+        scanf("%s", pais); // Lê o país (idioma)
+        char* saudacao = mapearPaisParaSaudacao(traducoes, N, pais); // Mapeia o país para a saudação correspondente
+        printf("%s\n", nome); // Exibe o nome
+        printf("%s\n", saudacao); // Exibe a saudação
+    }
+    liberarTraducoes(traducoes, N); // Libera a memória alocada para as traduções
+    return 0;
+}
+// Função que lê as traduções da entrada padrão
+void lerTraducoes(Mapper* traducoes, int N) {
+    for(int i = 0; i < N; i++) {   
+        char idioma[31], saudacao[31];
+        scanf("%s", idioma); // Lê o idioma
+        scanf(" %[^\n]", saudacao); // Lê a saudação
+        
+        traducoes[i].idioma = malloc(31 * sizeof(char)); // Aloca memória para o idioma
+        strcpy(traducoes[i].idioma, idioma); // Copia o idioma para a estrutura
+        
+        traducoes[i].saudacao = malloc(31 * sizeof(char)); // Aloca memória para a saudação
+        strcpy(traducoes[i].saudacao, saudacao); // Copia a saudação para a estrutura
+    }
+}
+// Função que libera a memória alocada para as traduções
+void liberarTraducoes(Mapper* traducoes, int N) {
+    for (int i = 0; i < N; i++) {
+        free(traducoes[i].idioma); // Libera a memória do idioma
+        free(traducoes[i].saudacao); // Libera a memória da saudação
+    }
+}
+---------------------------------------------------------
+seca no brasil-> 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Residency {
+    private int population;
+    private int consumption;
+
+    public Residency(int population, int consumption) {
+        this.population = population;
+        this.consumption = consumption;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+
+    public int getConsumption() {
+        return consumption;
+    }
+
+    public void setConsumption(int consumption) {
+        this.consumption = consumption;
+    }
+
+ // ---------------- CONSUMPTION PER PERSON -----------------------------
+    public int consumptionPerPerson(){
+        return consumption/population;
+    }
+}
+
+class City {
+    private Residency[] residences;
+
+    public City(Residency[] residences){
+        this.residences = residences;
+    }
+
+    public Residency[] getResidences() {
+        return residences;
+    }
+
+    public void setResidences(Residency[] residences) {
+        this.residences = residences;
+    }
+
+  // -------------------- AVERAGE CONSUMPTION -------------------------
+    public Double averageConsumption() {
+        int numPeople = 0;
+        int consumption = 0;
+        for(Residency res : residences){
+            numPeople += res.getPopulation();
+            consumption += res.getConsumption();
+        }
+        return (double) consumption/numPeople;
+    }
+
+  // -------------------- SORT IN ASCENDING ORDER OF CONSUMPTION ----------------
+    private void insertionSort() {
+        int tam = residences.length;
+        for(int i = 1; i < tam; i++){
+            Residency piv = residences[i];
+            int j = i-1;
+            while((j >= 0) && piv.consumptionPerPerson() < residences[j].consumptionPerPerson()){
+                residences[j+1] = residences[j];
+                j--;
+            }
+            residences[j+1] = piv;
+        }
+    }
+
+  // -------------------- LIST CONSUMPTION SORTED -------------------------
+    public void showConsumption(){
+        insertionSort();
+        for(Residency res : residences){
+            System.out.print(res.getPopulation()+"-"+res.consumptionPerPerson()+" ");
+        }
+        System.out.println();
+    }
+    
+}
+
+
+class Drought_1023 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        List<City> cities = new ArrayList<>();
+
+        int n = sc.nextInt();
+        while (n != 0) 
+        {
+            Residency[] residences = new Residency[n];
+
+            for(int i = 0; i < n; i++) {
+                residences[i] = new Residency(sc.nextInt(), sc.nextInt());
+            }
+
+            cities.add(new City(residences));
+
+            n = sc.nextInt();
+        }
+
+        int cityNumber = 1;
+        for(City city: cities){
+            System.out.println("Cidade# "+cityNumber+":");
+            city.showConsumption();
+            System.out.println("Consumo medio: "+ city.averageConsumption()+" m3.");
+        }
+
+        sc.close();
+    }
+}
+---------------------------------------------------------
+procurando novos seguidores->
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MONTH_DAYS 30
+
+typedef struct Cell {
+    int element;
+    struct Cell* next;
+}Cell;
+
+Cell* createCell(int x){
+    Cell* new = malloc(sizeof(Cell));
+    new->element = x;
+    new->next = NULL;
+    return new;
+}
+
+void show(Cell* head){
+    Cell* i = head->next;
+    while (i != NULL)
+    {
+        printf("%d ", i->element);
+        i = i->next;
+    }
+    printf("\n");
+}
+
+void add(Cell** tail, int num){
+    (*tail)->next = createCell(num);
+    *(tail) = (*tail)->next;
+}
+
+int withdraw(Cell** head){
+    Cell* tmp = (*head)->next;
+    int res = tmp->element;
+    (*head)->next = (*head)->next->next;
+    tmp->next = NULL;
+    free(tmp);
+    return res;
+}
+// -----------------------------------------------------------------------------------------
+int average(Cell* day){
+    int sum = 0, avg;
+    for(int i = 0; i < MONTH_DAYS; i++, day = day->next){
+        sum += day->element;
+    }
+    avg = sum / MONTH_DAYS;
+
+    return avg;
+}
+
+int daysRequied(int current_followers, int goal_followers, Cell** head, Cell** tail) {
+
+    int past_days = 0;
+
+    while(current_followers < goal_followers) {
+
+        int curr_avg = average((*head)->next);
+
+        current_followers += curr_avg;
+        add(tail, curr_avg);
+        withdraw(head);
+
+        past_days++;
+    }
+    return past_days;
+}
+
+int main(){
+    int N, M;
+    scanf("%d %d", &N, &M);
+
+    Cell* head = malloc(sizeof(Cell));
+    head->next = NULL;
+    Cell* currDay = head;
+
+    for(int i = 0; i < MONTH_DAYS; i++)
+    {
+        int subs;
+        scanf("%d", &subs);
+
+        add(&currDay, subs);
+    }
+    
+    printf("%d\n", daysRequied(N, M, &head, &currDay));
+
+    return 0;
+}
 */
 }
